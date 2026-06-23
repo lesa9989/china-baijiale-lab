@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>澳客 · 信息索引手册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fbe9d7 0%, #f3d5b5 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #2c241c;
+            padding: 1.5rem 1rem 2.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page-wrapper {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* 卡片系统 —— 暖白圆角 + 轻柔阴影 */
+        .card {
+            background: rgba(255, 251, 245, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 2.2rem;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 8px 20px rgba(120, 70, 30, 0.08), 0 2px 6px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card + .card {
+            margin-top: 1.6rem;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 530;
+            letter-spacing: -0.02em;
+            border-left: 5px solid #d9a76a;
+            padding-left: 0.9rem;
+            margin-bottom: 1.2rem;
+            color: #3d2e1f;
+        }
+
+        .card h3 {
+            font-weight: 500;
+            font-size: 1.15rem;
+            margin: 1.2rem 0 0.4rem;
+            color: #5c462f;
+        }
+
+        p {
+            margin-bottom: 0.9rem;
+        }
+
+        a {
+            color: #9e6d3b;
+            text-decoration: none;
+            font-weight: 470;
+            border-bottom: 1px dashed #dbaa7a;
+            transition: all 0.15s ease;
+        }
+
+        a:hover {
+            color: #7a4f26;
+            border-bottom-style: solid;
+            border-bottom-color: #b47d4e;
+        }
+
+        /* 按钮式链接（标记感） */
+        .link-button {
+            display: inline-block;
+            background: #e9d2b6;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #3d2e1f;
+            border: 1px solid #d8b692;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: background 0.2s, box-shadow 0.15s;
+            text-decoration: none;
+            border-bottom: none;
+            margin: 0.1rem 0.15rem;
+        }
+
+        .link-button:hover {
+            background: #dbbc96;
+            box-shadow: 0 2px 8px rgba(130, 80, 30, 0.10);
+            border-bottom: none;
+        }
+
+        .link-button:active {
+            transform: scale(0.97);
+        }
+
+        .link-button i {
+            font-style: normal;
+            opacity: 0.7;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.7rem;
+            margin: 1rem 0 0.3rem;
+        }
+
+        .tag {
+            background: #efe2d1;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #4e3b29;
+            letter-spacing: 0.01em;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e5cfb7;
+            margin: 1.3rem 0;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 620px) {
+            .grid-2col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .hero-area {
+            text-align: center;
+            padding: 0.8rem 0 0.2rem;
+        }
+
+        .hero-area h1 {
+            font-size: 2.4rem;
+            font-weight: 460;
+            letter-spacing: -0.03em;
+            color: #382b1d;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #3d2f1f, #7a5d3e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-area .subhead {
+            font-size: 1.1rem;
+            color: #6e5a44;
+            margin-top: 0.1rem;
+            letter-spacing: 0.02em;
+            font-weight: 340;
+        }
+
+        .faq-item {
+            padding: 0.7rem 0 0.2rem;
+            border-bottom: 1px solid #eddccb;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 520;
+            color: #3d2b1b;
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .faq-q::before {
+            content: "❓";
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        .faq-a {
+            margin-left: 1.4rem;
+            color: #4d3b2b;
+            font-size: 0.94rem;
+        }
+
+        .notice-box {
+            background: #f6edde;
+            border-radius: 1.6rem;
+            padding: 1.2rem 1.4rem;
+            margin: 1.6rem 0 0.2rem;
+            border-left: 4px solid #d9a76a;
+        }
+
+        .footer-note {
+            margin-top: 2.2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7c6b58;
+        }
+
+        .dirname-label {
+            color: #8c7a65;
+            font-size: 0.75rem;
+            letter-spacing: 0.2px;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- hero 区 简练目录感 -->
+    <div class="card hero-area" style="padding-bottom: 1.2rem;">
+        <h1>📋 资料整理 · 澳客</h1>
+        <div class="subhead">信息索引 · 分类入口 · 实用注解</div>
+        <div style="margin-top: 0.8rem;">
+            <span class="tag">生活向</span>
+            <span class="tag">索引工具</span>
+            <span class="tag">知识卡片</span>
+        </div>
+    </div>
+
+    <!-- 说明区：切入角度 —— 资料整理和信息索引 -->
+    <div class="card">
+        <h2>📌 索引说明</h2>
+        <p>这里不是简单罗列，而是围绕「<a href="https://cn-m-aoke.com" class="link-button" style="font-weight:500;">澳客</a>」搭建的一套轻量知识入口。把散落的要点按目录收拢，方便随时查用、扩展。每个卡片对应一类信息模块，从背景到常见疑问，都尽量保持平实、可读。</p>
+        <p>如果你习惯从资料汇编的角度切入，那么这个页面就像一本随手翻的手册——没有复杂层级，只有按主题区隔的卡片和标签。所有链接都指向 <strong>cn-m-aoke.com</strong> 相关内容。</p>
+        <div class="tag-group">
+            <span class="link-button" style="cursor:default;">📁 信息归档</span>
+            <span class="link-button" style="cursor:default;">🧩 模块索引</span>
+            <span class="link-button" style="cursor:default;">📖 速查</span>
+        </div>
+    </div>
+
+    <!-- 两列布局：特点 + 场景 (相关信息区) -->
+    <div class="grid-2col" style="margin-top: 0.2rem;">
+        <!-- 特点卡片 -->
+        <div class="card">
+            <h2>🗂️ 特点速览</h2>
+            <ul style="list-style: none; padding-left: 0.2rem;">
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 0.4rem;">📎 <span><strong>分类索引</strong> – 按主题分组，减少翻找成本</span></li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 0.4rem;">📎 <span><strong>轻量目录</strong> – 每张卡片独立，可直接定位</span></li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 0.4rem;">📎 <span><strong>可扩展</strong> – 结构简单，方便后续补充条目</span></li>
+                <li style="margin-bottom: 0.6rem; display: flex; gap: 0.4rem;">📎 <span><strong>生活化语言</strong> – 不用生硬术语，读起来不累</span></li>
+            </ul>
+            <p style="margin-top: 0.8rem;">想直接浏览完整内容？点这里 → <a href="https://cn-m-aoke.com">澳客</a> 资料页。</p>
+        </div>
+        <!-- 场景卡片 -->
+        <div class="card">
+            <h2>🧭 适用场景</h2>
+            <p><span style="background: #edd5bd; padding: 0.1rem 0.5rem; border-radius: 20px;">✔</span> 日常收集零散信息，需要统一入口</p>
+            <p><span style="background: #edd5bd; padding: 0.1rem 0.5rem; border-radius: 20px;">✔</span> 快速回顾某个主题下的核心要点</p>
+            <p><span style="background: #edd5bd; padding: 0.1rem 0.5rem; border-radius: 20px;">✔</span> 把链接、说明、提示整合到一张页面</p>
+            <p><span style="background: #edd5bd; padding: 0.1rem 0.5rem; border-radius: 20px;">✔</span> 作为个人或团队的小型知识看板</p>
+            <div style="margin-top: 0.7rem; background: #f3e4d3; border-radius: 30px; padding: 0.3rem 1rem; display: inline-block;">🔍 也可以嵌入笔记或书签</div>
+        </div>
+    </div>
+
+    <!-- 提示区 + 相关信息区 (合并为提示+补充) -->
+    <div class="card">
+        <h2>💡 提示 & 补充</h2>
+        <div class="notice-box" style="margin-top: 0;">
+            <p style="margin-bottom: 0.2rem;"><strong>使用建议</strong> · 每个卡片都可以单独参考，不需要从头读到尾。如果你在找关于「澳客」的具体内容，可以直接从下方 FAQ 摘要或链接进入。</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin: 0.8rem 0;">
+            <span>🔸 资料定期整理，保持新鲜</span>
+            <span>🔸 所有链接指向同一站点</span>
+            <span>🔸 卡片内容可复用、可打印</span>
+        </div>
+        <p style="margin-top: 0.2rem;">另外，页面上使用的标签和分类仅作示意，你可以根据实际需要调整分组。比如把「特点速览」换成「术语表」或「工具清单」。核心入口依然是 <a href="https://cn-m-aoke.com">澳客</a>。</p>
+    </div>
+
+    <!-- FAQ 摘要区 -->
+    <div class="card">
+        <h2>❔ 常见疑问摘要</h2>
+        <div class="faq-item">
+            <div class="faq-q">澳客 是什么类型的站点？</div>
+            <div class="faq-a">它是一个内容整理与索引站点，提供分类信息、说明和实用链接。页面以索引手册的形式呈现，强调资料的条理性。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">怎么快速找到某个模块？</div>
+            <div class="faq-a">使用页面上的卡片标题和标签组。每个卡片都代表一个主题，标签可以帮你筛选方向。另外正文中的 <a href="https://cn-m-aoke.com">澳客</a> 链接会带你到汇总页。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">资料会更新吗？</div>
+            <div class="faq-a">会。站点内容会根据需要补充和优化，保持索引的实用性。如果有新的分类或信息调整，卡片也会相应变化。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">我可以复制或分享这些内容吗？</div>
+            <div class="faq-a">内容本身是公开的，但请保持引用规范，不歪曲原意。具体引用方式可以参考站点的说明。</div>
+        </div>
+        <hr>
+        <p style="font-size: 0.9rem; color: #5f4e3b;">📌 如果还有其他疑问，可以直接通过 <a href="https://cn-m-aoke.com">澳客</a> 页面上的信息渠道了解。</p>
+    </div>
+
+    <!-- 额外相关信息区：目录索引预览 -->
+    <div class="card">
+        <h2>📂 相关信息区</h2>
+        <p>下面列出几个典型的目录块，方便你快速了解内容分布。每个块都可以展开成独立卡片——在实际页面中对应不同的资料模块。</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0;">
+            <span class="link-button" style="background: #e3cfb7;">🔖 入门索引</span>
+            <span class="link-button" style="background: #e3cfb7;">🔖 术语说明</span>
+            <span class="link-button" style="background: #e3cfb7;">🔖 常见路径</span>
+            <span class="link-button" style="background: #e3cfb7;">🔖 参考备忘</span>
+            <span class="link-button" style="background: #e3cfb7;">🔖 外部资源</span>
+        </div>
+        <p>你也可以把上面这些看作书签，实际点击会指向 <a href="https://cn-m-aoke.com">澳客</a> 下的细分内容。这种目录结构适合慢慢翻阅，也适合快速跳转。</p>
+        <div style="margin-top: 0.6rem; font-size: 0.8rem; color: #7b6852;">✽ 每个目录块都保持独立，之间没有强制顺序</div>
+    </div>
+
+    <!-- 一个小的脚注 / 页脚区 -->
+    <div class="footer-note">
+        <span>📇 索引版本 · 基于资料整理思路</span><br>
+        <span style="opacity: 0.6;">内容保持克制与实用 · 页面结构随方向调整</span>
+    </div>
+
+</div>
+</body>
+</html>
